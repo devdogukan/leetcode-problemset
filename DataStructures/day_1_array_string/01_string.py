@@ -67,4 +67,13 @@ print(f"{string1} {string2}")
 
 print()
 
+# remove a character
+string_to_remove = "Hello, World!"
+print(string_to_remove.replace(",", ""))
+print(string_to_remove.replace(" ", ""))
+print(string_to_remove.replace("o", ""))
+print(string_to_remove.replace("o", "", 1))
+
+print()
+
 
