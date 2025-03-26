@@ -6,24 +6,21 @@ public class FindMaxAverage {
     }
 
     public static double findMaxAverage(int[] nums, int k) {
-        double result = Integer.MIN_VALUE;
+        int result = Integer.MIN_VALUE;
+        int sum = 0;
 
-        int leftPointer = 0, rigthPointer = k - 1;
-        
-        while (rigthPointer < nums.length) {
-            int sum = 0;
-            for (int i = leftPointer; i <= rigthPointer; i++) {
-                sum += nums[i];
-            }
-
-            if (sum > result) {
-                result = sum;
-            }
-
-            leftPointer++;
-            rigthPointer++;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
         }
 
-        return result / k;
+        result = Math.max(result, sum);
+
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+
+            result = Math.max(result, sum);
+        }
+
+        return (double)result / k;
     }
 }
