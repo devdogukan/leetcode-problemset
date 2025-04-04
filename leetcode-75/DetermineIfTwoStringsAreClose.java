@@ -1,10 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Arrays;
 
 public class DetermineIfTwoStringsAreClose {
 
@@ -15,45 +9,27 @@ public class DetermineIfTwoStringsAreClose {
     }
 
     public static boolean closeStrings(String word1, String word2) {
-
         if (word1.length() != word2.length()) return false;
 
-        Set<Character> set1 = new HashSet<>();
-        Set<Character> set2 = new HashSet<>();
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
 
         for (char c : word1.toCharArray()) {
-            set1.add(c);
+            count1[c - 'a']++;
         }
-
         for (char c : word2.toCharArray()) {
-            set2.add(c);
+            count2[c - 'a']++;
         }
 
-        if (set1.size() != set2.size() || !set1.containsAll(set2)) return false;
-
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
-
-        for (Character character : word1.toCharArray()) {
-            if (!map1.containsKey(character)) {
-                map1.put(character, 1);
-            } else {
-                map1.put(character, map1.get(character) + 1);
+        for (int i = 0; i < 26; i++) {
+            if ((count1[i] > 0 && count2[i] == 0) || (count1[i] == 0 && count2[i] > 0)) {
+                return false;
             }
         }
 
-        for (Character character : word2.toCharArray()) {
-            if (!map2.containsKey(character)) {
-                map2.put(character, 1);
-            } else {
-                map2.put(character, map2.get(character) + 1);
-            }
-        }
+        Arrays.sort(count1);
+        Arrays.sort(count2);
 
-        List<Integer> values1 = new ArrayList<>(map1.values());
-        List<Integer> values2 = new ArrayList<>(map2.values());
-        Collections.sort(values1);
-        Collections.sort(values2);
-        return values1.equals(values2);
+        return Arrays.equals(count1, count2);
     }
 }
