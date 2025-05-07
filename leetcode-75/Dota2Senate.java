@@ -6,16 +6,6 @@ public class Dota2Senate {
         System.out.println(predictPartyVictory("RD")); // Radiant
         System.out.println(predictPartyVictory("RDD")); // Dire
         System.out.println(predictPartyVictory("DDRRR")); // Dire
-
-        /*
-         * DDRRR
-         * DRRRD
-         * RRDD
-         * RDDR
-         * DRR
-         * RD
-         * R
-         */
     }
 
     public static String predictPartyVictory(String senate) {
